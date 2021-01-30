@@ -1,12 +1,12 @@
 {
-  "name": "stadia",
-  "version": "1.0.0",
+  "name": "stadiapp",
+  "version": "0.0.0",
   "description": "Stadia Unofficial App",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/x0uter/stadiapp",
   "keywords": [
     "stadia",
     "google",
@@ -14,9 +14,14 @@
     "games",
     "unofficial"
   ],
-  "author": "GitHub",
-  "license": "CC0-1.0",
+  "author": "x0uter",
   "devDependencies": {
     "electron": "^11.2.1"
+  },
+  "build": {
+    "appId": "com.stadiapp",
+    "win": {
+      "icon": "assets/stadia.ico"
+    }
   }
 }
