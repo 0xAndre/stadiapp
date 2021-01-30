@@ -20,6 +20,21 @@ steps:
   inputs:
     script: 'cd src && ls'
 
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      $date = Get-Date -Format "dd-MM-yyyy"
+      Write-Host "##vso[task.setvariable variable=date]$date"
+  displayName: get current date
+
+- task: RegExMatchReplace@2
+  inputs:
+    PathToFile: 'src/settings.json'
+    RegEx: '@@DATE@@'
+    ValueToReplace: '$(date)'
+  displayName: 'update buildnumber at settings.json'
+
 - task: RegExMatchReplace@2
   inputs:
     PathToFile: 'src/settings.json'
