@@ -1,0 +1,22 @@
+{
+  "name": "stadia",
+  "version": "1.0.0",
+  "description": "Stadia Unofficial App",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/electron/electron-quick-start",
+  "keywords": [
+    "stadia",
+    "google",
+    "app",
+    "games",
+    "unofficial"
+  ],
+  "author": "GitHub",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^11.2.1"
+  }
+}
