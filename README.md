@@ -18,6 +18,7 @@ Only available for **Windows**. However, you can download the source code and ru
 › git clone https://github.com/x0uter/stadiapp
 
 # Install
+› cd stadiapp/src
 › npm install
 
 # Run
