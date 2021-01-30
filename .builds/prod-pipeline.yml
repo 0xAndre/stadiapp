@@ -50,6 +50,11 @@ steps:
 
 - task: CmdLine@2
   inputs:
+    script: 'cd src && npm install'
+  displayName: 'npm install'
+
+- task: CmdLine@2
+  inputs:
     script: 'cd src && electron-builder -w --publish always'
   displayName: 'build windows app'
 
