@@ -23,14 +23,14 @@ steps:
 
 - task: RegExMatchReplace@2
   inputs:
-    PathToFile: 'settings.json'
+    PathToFile: 'src/settings.json'
     RegEx: '@@VERSION@@'
     ValueToReplace: '$(build.buildnumber)'
   displayName: 'update buildnumber at settings.json'
 
 - task: RegExMatchReplace@2
   inputs:
-    PathToFile: 'package.json'
+    PathToFile: 'src/package.json'
     RegEx: '0.0.0'
     Global: false
     ValueToReplace: '$(build.buildnumber)'
@@ -38,7 +38,7 @@ steps:
 
 - task: RegExMatchReplace@2
   inputs:
-    PathToFile: 'package-lock.json'
+    PathToFile: 'src/package-lock.json'
     RegEx: '0.0.0'
     Global: false
     ValueToReplace: '$(build.buildnumber)'
@@ -56,7 +56,7 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    SourceFolder: 'dist'
+    SourceFolder: 'src/dist'
     Contents: '*.exe'
     TargetFolder: '$(build.artifactstagingdirectory)'
   displayName: 'copy setup to artifact folder'
