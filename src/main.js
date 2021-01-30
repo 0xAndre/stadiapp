@@ -1,7 +1,8 @@
 const { app, BrowserWindow, session, globalShortcut, shell } = require('electron')
 const Menubar = require('./menu')
-
+const Store = require('electron-store')
 const path = require('path')
+const store = new Store()
 
 const settings = require('./settings.json')
 
@@ -33,13 +34,17 @@ function createWindow() {
     icon: path.join(__dirname, 'assets/stadia.ico'),
   })
 
+  if (!store.get('language')) {
+    store.set('language', settings.defaultLanguage)
+  }
+
   splashWindow.loadFile(path.join(__dirname, 'views/splash.html'))
 
   setTimeout(function () {
     splashWindow.destroy()
     mainWindow.loadFile(path.join(__dirname, 'views/app.html'))
     mainWindow.setMenuBarVisibility(true)
-    
+
 
     mainWindow.maximize()
 
@@ -58,7 +63,7 @@ function createWindow() {
     })
 
     mainWindow.webContents.on('did-finish-load', function () {
-      mainWindow.webContents.send('sendlanguage', settings.currentLanguage)
+      mainWindow.webContents.send('sendlanguage', store.get('language'))
     })
   }, 3000)
 
@@ -68,7 +73,7 @@ app.whenReady().then(() => {
   session.defaultSession.webRequest.onBeforeSendHeaders((details, callback) => {
     if (details.url.includes('https://accounts.google.com')) {
       loginMode = true
-    } else if (details.url.includes(`https://stadia.google.com/home?hl=${settings.currentLanguage}`)) {
+    } else if (details.url.includes(`https://stadia.google.com/home?hl=${store.get('language')}`)) {
       loginMode = false
     }
 

@@ -1,7 +1,9 @@
 const { app, BrowserWindow, Menu } = require('electron')
 const fs = require('fs')
 const path = require('path')
-const settings = require('./settings.json')
+const Store = require('electron-store')
+
+const store = new Store()
 
 
 module.exports = (mainWindow) => {
@@ -15,7 +17,7 @@ module.exports = (mainWindow) => {
                         {
                             label: 'English',
                             type: 'checkbox',
-                            checked: settings.currentLanguage === 'en',
+                            checked: store.get('language') === 'en',
                             click() {
                                 saveLanguage('en')
                             }
@@ -23,7 +25,7 @@ module.exports = (mainWindow) => {
                         {
                             label: 'French',
                             type: 'checkbox',
-                            checked: settings.currentLanguage === 'fr',
+                            checked: store.get('language') === 'fr',
                             click() {
                                 saveLanguage('fr')
                             }
@@ -31,7 +33,7 @@ module.exports = (mainWindow) => {
                         {
                             label: 'German',
                             type: 'checkbox',
-                            checked: settings.currentLanguage === 'de',
+                            checked: store.get('language') === 'de',
                             click() {
                                 saveLanguage('de')
                             }
@@ -39,7 +41,7 @@ module.exports = (mainWindow) => {
                         {
                             label: 'Spanish',
                             type: 'checkbox',
-                            checked: settings.currentLanguage === 'es',
+                            checked: store.get('language') === 'es',
                             click() {
                                 saveLanguage('es')
                             }
@@ -47,7 +49,7 @@ module.exports = (mainWindow) => {
                         {
                             label: 'Portuguese',
                             type: 'checkbox',
-                            checked: settings.currentLanguage === 'pt',
+                            checked: store.get('language') === 'pt',
                             click() {
                                 saveLanguage('pt')
                             }
@@ -139,8 +141,7 @@ module.exports = (mainWindow) => {
 
 
 function saveLanguage(lang) {
-    settings.currentLanguage = lang
-    fs.writeFileSync(path.join(__dirname, 'settings.json'), JSON.stringify(settings, null, 2))
+    store.set('language', lang)
     app.relaunch()
     app.exit()
 }
