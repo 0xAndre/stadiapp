@@ -140,7 +140,7 @@ module.exports = (mainWindow) => {
 
 function saveLanguage(lang) {
     settings.currentLanguage = lang
-    fs.writeFileSync('settings.json', JSON.stringify(settings, null, 2))
+    fs.writeFileSync(path.join(__dirname, 'settings.json'), JSON.stringify(settings, null, 2))
     app.relaunch()
     app.exit()
 }
