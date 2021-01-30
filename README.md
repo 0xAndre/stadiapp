@@ -12,6 +12,18 @@ Google Chrome does not need to be installed.
 Get Stadiapp [here](https://github.com/x0uter/stadiapp/releases).  
 Only available for **Windows**. However, you can download the source code and run it on **Linux** and **macOS**.
 
+## Run Code
+```bash
+# Clone
+› git clone https://github.com/x0uter/stadiapp
+
+# Install
+› npm install
+
+# Run
+› npm start
+```
+
 ## Features
 * Play Stadia without Google Chrome
 * Support multiple languages:
@@ -29,6 +41,6 @@ Only available for **Windows**. However, you can download the source code and ru
 Submit your Feature idea, ![here](https://github.com/x0uter/stadiapp/issues).
 
 ## Contributing
-Feel free to participate in this project. If you are interested in fixing issues and contributing, please submit your **pull request**.
+Feel free to participate in this project. If you are interested in fixing issues and contributing, **pull requests** are welcome!
 
-If you find a bug, please create a issue.
+If you find a bug, please create an issue.
