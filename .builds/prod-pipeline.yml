@@ -51,7 +51,7 @@ steps:
 
 - task: CmdLine@2
   inputs:
-    script: 'electron-builder -w --publish always'
+    script: 'cd src && electron-builder -w --publish always'
   displayName: 'build windows app'
 
 - task: CopyFiles@2
