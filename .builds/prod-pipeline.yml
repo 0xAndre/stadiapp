@@ -12,9 +12,8 @@ pool:
 variables:
    major: 1
    minor: 0
-   patch: 0
 
-name: $(major).$(minor).$(patch)$(rev:.rrr)
+name: $(major).$(minor)$(rev:.rrr)
 
 steps:
 - task: CmdLine@2
