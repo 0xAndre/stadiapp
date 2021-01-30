@@ -7,18 +7,62 @@ trigger:
     - 'src'
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'windows-latest'
 
 variables:
    major: 1
    minor: 0
    patch: 0
 
-name: $(major).$(minor).$(patch).$(rev:.rrr)
+name: $(major).$(minor).$(patch)$(rev:.rrr)
 
 steps:
 - task: CmdLine@2
   inputs:
     script: 'cd src && ls'
 
+- task: RegExMatchReplace@2
+  inputs:
+    PathToFile: 'settings.json'
+    RegEx: '@@VERSION@@'
+    ValueToReplace: '$(build.buildnumber)'
+  displayName: 'update buildnumber at settings.json'
 
+- task: RegExMatchReplace@2
+  inputs:
+    PathToFile: 'package.json'
+    RegEx: '0.0.0'
+    Global: false
+    ValueToReplace: '$(build.buildnumber)'
+  displayName: 'update buildnumber at package.json'
+
+- task: RegExMatchReplace@2
+  inputs:
+    PathToFile: 'package-lock.json'
+    RegEx: '0.0.0'
+    Global: false
+    ValueToReplace: '$(build.buildnumber)'
+  displayName: 'update buildnumber at package-lock.json'
+
+- task: CmdLine@2
+  inputs:
+    script: 'npm install -g electron-builder'
+  displayName: 'install electron-builder'
+
+- task: CmdLine@2
+  inputs:
+    script: 'electron-builder -w --publish always'
+  displayName: 'build windows app'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: 'dist'
+    Contents: '*.exe'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+  displayName: 'copy setup to artifact folder'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
