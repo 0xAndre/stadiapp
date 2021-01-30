@@ -23,5 +23,8 @@
     "win": {
       "icon": "assets/stadia.ico"
     }
+  },
+  "dependencies": {
+    "electron-store": "^7.0.0"
   }
 }
